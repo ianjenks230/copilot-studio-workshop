@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} - {{ site.title }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <link rel="stylesheet" href="/css/prism-one-dark.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">{{ site.emoji }} {{ site.title }}</a>
+      <div class="header-actions">
+        <button class="search-trigger" id="searchTrigger" aria-label="Search">
+          <span class="search-text">Search</span>
+          <kbd>Ctrl K</kbd>
+        </button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          Menu
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Modal -->
+  <div class="search-modal" id="searchModal" role="dialog" aria-label="Search">
+    <div class="search-modal-overlay" id="searchOverlay"></div>
+    <div class="search-modal-content">
+      <div class="search-input-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Search workshop..." autocomplete="off">
+        <kbd>Esc</kbd>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <div class="site-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav" aria-label="Workshop navigation">
+        {% set pages = collections.workshopPages %}
+        {% for item in pages %}
+          <a href="{{ item.url }}" class="sidebar-link {% if item.url == page.url %}active{% endif %}" {% if item.data.sidebarIcon %}data-icon="{{ item.data.sidebarIcon }}"{% endif %}>
+            {{ item.data.sidebarTitle or item.data.title }}
+          </a>
+        {% endfor %}
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+      <div class="content-wrapper">
+        <article class="content">
+          {{ content | safe }}
+
+          {% if lastUpdated %}
+          <p class="last-updated">Last updated: {{ lastUpdated | dateDisplay }}</p>
+          {% endif %}
+        </article>
+
+        <!-- On This Page (TOC) -->
+        {% set headings = content | toc %}
+        {% if headings.length > 0 %}
+        <aside class="toc" aria-label="On this page">
+          <div class="toc-inner">
+            <h3 class="toc-title">On this page</h3>
+            <ul class="toc-list">
+              {% for heading in headings %}
+              <li class="toc-item toc-level-{{ heading.level }}">
+                <a href="#{{ heading.id }}" class="toc-link">{{ heading.text }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </aside>
+        {% endif %}
+      </div>
+
+      <!-- Previous/Next Navigation -->
+      {% set pages = collections.workshopPages %}
+      {% set prevPage = page | getPreviousPage(pages) %}
+      {% set nextPage = page | getNextPage(pages) %}
+      {% if prevPage or nextPage %}
+      <nav class="page-nav" aria-label="Page navigation">
+        {% if prevPage %}
+        <a href="{{ prevPage.url }}" class="page-nav-link page-nav-prev">
+          <span class="page-nav-label">Previous page</span>
+          <span class="page-nav-title">{{ prevPage.data.title }}</span>
+        </a>
+        {% else %}
+        <div></div>
+        {% endif %}
+        {% if nextPage %}
+        <a href="{{ nextPage.url }}" class="page-nav-link page-nav-next">
+          <span class="page-nav-label">Next page</span>
+          <span class="page-nav-title">{{ nextPage.data.title }}</span>
+        </a>
+        {% endif %}
+      </nav>
+      {% endif %}
+
+      <!-- Return to top -->
+      <button class="return-to-top" id="returnToTop" aria-label="Return to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        Return to top
+      </button>
+    </main>
+  </div>
+
+  <script src="/js/search.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "workshop-template",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A modern workshop documentation template built with Eleventy",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve --watch",
+    "clean": "rimraf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "markdown-it-anchor": "^9.0.1",
+    "rimraf": "^5.0.5"
+  }
+}

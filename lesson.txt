@@ -1,0 +1,194 @@
+**GitHub Copilot Agent – Instruction Pack**  
+**Lesson: Copilot Studio Agent Creation Using SharePoint-Based Knowledge**
+
+**Version:** 1.0  
+**Prepared for:** Internal delivery teams, cloud engineers, architects, audit/compliance leads, and technical consultants  
+**Objective:** Provide a clear, practical, and governance-focused guide to creating a Copilot Studio agent that securely utilizes SharePoint as its single source of knowledge.
+
+### 1. Lesson Overview and Purpose
+
+This lesson demonstrates how to build a functional Copilot Studio agent that draws exclusively from designated SharePoint repositories. The agent delivers accurate, evidence-based responses while strictly respecting Microsoft 365 permissions and organizational governance standards.
+
+**Why this lesson matters**  
+Large SharePoint repositories often contain authoritative but scattered information that is difficult to search manually. A properly configured Copilot Studio agent solves this by providing scoped, permission-aware access to the exact documents users are authorized to view. The result is faster evidence lookup, reduced manual document review, and improved consistency in client engagements, audits, and internal knowledge work.
+
+**Who this lesson is for**  
+- Cloud engineers and architects responsible for Microsoft 365 solutions  
+- Audit and compliance leads concerned with data governance  
+- Technical consultants and internal delivery teams supporting client-specific knowledge needs  
+
+**Learning outcomes**  
+By the end of this lesson, participants will be able to:  
+- Create a new agent in Copilot Studio with a narrowly scoped SharePoint knowledge source.  
+- Develop high-quality instructions that enforce accuracy, citation rigor, and appropriate failure behavior.  
+- Add and validate SharePoint content while preventing context bleed.  
+- Configure and test the agent while confirming that SharePoint permissions are fully enforced.  
+- Publish the agent securely and apply operational best practices for long-term reliability.
+
+### 2. Prerequisites
+
+To create an agent in Microsoft Copilot Studio and enable it to access a SharePoint link (typically as a knowledge source for grounding responses in documents or site content), the following prerequisites must be met. These requirements ensure proper access, licensing, permissions, and technical configuration.
+1. Licensing Requirements
+•	Microsoft 365 Copilot license is required for full functionality.
+•	End users interacting with the agent generally do not require a special license beyond standard Microsoft 365 access, though certain channels (e.g., within Microsoft 365 Copilot or SharePoint) may impose restrictions based on licensing.
+Note: A trial license is available for initial testing, but production use requires paid capacity.
+2. Administrative Roles and Permissions
+•	For creating and managing agents in Copilot Studio: AI Admin, Global Admin, or equivalent roles in Microsoft Entra ID / Microsoft 365 admin center. Least-privilege roles are recommended.
+•	For accessing SharePoint: You (or the agent) must have appropriate permissions on the target SharePoint site or document library channel.
+•	The agent respects existing SharePoint permissions: users will only see content they have access to.
+3. Technical and Environment Setup
+•	Sign in to Copilot Studio at copilotstudio.microsoft.com. Ensure your environment supports agent creation (some features require specific environment configurations).
+4. SharePoint-Specific Prerequisites for Agent Access
+•	Adding SharePoint as a knowledge source (to allow the agent to reference a SharePoint link/site):
+o	Provide the SharePoint URL (omit "https://" prefix; use sharepoint.com domain; limit to two directory levels deep).
+o	Supported content includes documents and modern pages; classic ASPX pages are not fully supported for generative answers.
+o	Authentication is typically handled via Microsoft Entra ID (default). For manual authentication scenarios, you may need to register an app in Azure Entra ID with appropriate API permissions (e.g., Sites.Read.All, Files.Read.All) and grant admin consent.
+•	The agent can ground responses in SharePoint documents, lists, or sites when properly configured.
+•	For complex setups involving custom authentication or advanced actions, familiarity with Microsoft Graph permissions or Power Platform connectors is beneficial.
+
+### 3. Step-by-Step Agent Creation Process
+
+This section forms the core of the lesson. Follow the numbered steps in sequence within Copilot Studio.
+
+1. **Open Copilot Studio**  
+   Navigate to [Copilot Studio](https://copilotstudio.microsoft.com) and sign in with your organizational Microsoft 365 account.
+
+2. **Create a new agent**  
+   Select **Create agent** (or **+ New agent**).  
+   - **Agent name**: Use a scoped, descriptive name (example: “ClientX – Audit Knowledge Assistant”).  
+   - **Description**: Clearly state the agent’s purpose and boundaries (example: “Provides evidence-based answers from ClientX SharePoint library only. Answers must cite source documents.”).  
+   - **Instructions**: Start with the baseline template provided in Section 4 and customize as needed.
+
+3. **Configure agent instructions** (detailed in Section 4)  
+   Paste and refine the instruction template before proceeding.
+
+4. **Add SharePoint knowledge** (detailed in Section 5)  
+   This is the primary mechanism that connects the agent to your content.
+
+5. **Test the agent**  
+   Use the built-in test pane immediately after adding knowledge.  
+   - Pose representative questions that require specific document content.  
+   - Verify that responses include citations and remain within scope.  
+   - Confirm that “no evidence found” responses appear when appropriate.  
+   - Test with a user account that lacks access to the SharePoint folder to validate permission enforcement.
+
+6. **Publish and share** (detailed in Section 9)
+
+### 4. Agent Instructions Strategy
+
+Agent accuracy is determined primarily by instruction quality. Instructions define scope, tone, citation requirements, and failure handling.
+
+**Baseline Instruction Template**  
+Copy and paste the following template into the agent’s instructions field, then customize the bracketed sections:
+
+```
+You are an evidence-based technical assistant for [Client or Domain Name] knowledge.
+
+Purpose  
+Answer questions using only the documents provided in the attached SharePoint knowledge sources. Never speculate or use external knowledge.
+
+General Guidelines  
+- Remain strictly within the provided SharePoint content.  
+- If the answer is not present in the documents, respond: “No evidence found in the authorized knowledge sources.”  
+- Always cite the exact document title and section where the information appears.  
+- Maintain a professional, neutral, and audit-ready tone.
+
+Response Logic  
+1. Analyze the user question.  
+2. Search the SharePoint knowledge sources for relevant content.  
+3. If relevant content exists, synthesize a clear answer and include inline citations.  
+4. If no relevant content exists, state that no evidence was found.
+
+Error Handling  
+- Do not apologize excessively.  
+- Do not suggest consulting external sources.  
+- Do not offer to “search again” unless explicitly instructed.
+
+Response Format  
+- Use concise, scannable paragraphs or bulleted lists.  
+- Include citations in the format: (Source: Document Title – Section/Page).  
+- End every response with: “This response is based solely on the authorized SharePoint knowledge sources.”
+
+Follow-up Behavior  
+- Encourage users to provide more context if the question is ambiguous.  
+- Remain within the defined knowledge scope for all follow-up questions.
+```
+
+**When and why to customize**  
+- Adjust tone for audit-heavy environments (increase citation rigor).  
+- Add framework alignment (e.g., “Align responses with [specific compliance standard]”).  
+- Tighten output constraints for highly regulated engagements.  
+
+**Warning**  
+Avoid frequent changes to instructions after initial deployment (instruction drift). Document any modifications and re-test the agent thoroughly.
+
+### 5. Adding SharePoint Knowledge
+
+1. In the agent editor, select **Add knowledge** → **SharePoint**.  
+2. Paste the direct URL to the specific library or folder (not the entire site root when possible).  
+   Example: `https://contoso.sharepoint.com/sites/ClientX/Shared%20Documents/Audit%20Folder`  
+3. Validate access and indexing. Copilot Studio will confirm connectivity.  
+4. Review the indexed content summary and confirm relevance.  
+5. Save and allow indexing to complete (typically a few minutes).
+
+**Best-practice note**  
+Use client-specific root folders or dedicated libraries instead of entire SharePoint sites. This prevents context bleed and keeps the agent focused. Each agent supports a maximum of 25 SharePoint knowledge sources.
+
+### 6. Authentication and Access Control
+
+The agent authenticates through Microsoft Entra ID. Access is granted explicitly by the owner.  
+
+**Permission enforcement**  
+- The agent respects all SharePoint item-level and folder-level permissions.  
+- No permission elevation or bypass occurs.
+
+**Common failure modes**  
+- User lacks access to the agent → The agent cannot be opened.  
+- User lacks access to the referenced SharePoint content → The agent cannot retrieve or cite that content.
+
+### 7. Operational Clarifications (Common Questions)
+
+1. **How do we prevent hallucinations?**  
+   Responses are evidence-based and limited to SharePoint content only. The instructions explicitly require a “no evidence found” response when information is absent.
+
+2. **How does knowledge stay current?**  
+   The agent automatically reflects changes made to SharePoint documents. No manual retraining is required.
+
+3. **What happens if permissions are incorrect?**  
+   The agent will not surface content the user cannot access directly in SharePoint.
+
+4. **How does this scale?**  
+   Maintain the principle of least information: create narrowly scoped agents per client or domain. Use orchestrator agents only when multiple specialized agents must be coordinated.
+
+5. **How do we measure effectiveness?**  
+   Use the Activity, Evaluation, and Analytics tabs within Copilot Studio. These tools are supplementary and not the focus of this lesson.
+
+### 8. Tools, Triggers, and Advanced Capabilities
+
+For this foundational lesson, advanced features are out of scope.  
+- Suggested tools and triggers (new items, schedule-based) may be explored after basic agents are stable.  
+- Caution: Unnecessary automation increases complexity and governance overhead.  
+- Multi-agent architectures (SME agents + orchestrator) should be considered only after single agents are proven effective.
+
+### 9. Publishing and Access
+
+1. In Copilot Studio, select **Publish**.  
+2. Share the agent with specific users, security groups, or the entire organization via the sharing settings.  
+3. Users can access the agent through Microsoft Copilot in Teams, the Copilot mobile app, or directly in Copilot Studio (depending on sharing configuration).
+
+### 10. Operational Best Practices and Summary
+
+**Best practices**  
+- Maintain clean, well-organized SharePoint content.  
+- Keep every agent narrowly scoped.  
+- Reuse and version-control the instruction template across agents.  
+- Validate permissions with test users before broad release.  
+- Periodically re-test responses against current SharePoint content.
+
+**Summary**  
+This lesson provides a complete, repeatable process for creating governance-compliant Copilot Studio agents that leverage SharePoint as their knowledge foundation. By emphasizing narrow scope, high-quality instructions, and strict permission enforcement, these agents deliver accurate, auditable assistance while significantly reducing manual document review.  
+
+The primary value lies in the combination of SharePoint’s authoritative content and Copilot Studio’s structured agent framework—delivered under full organizational governance.  
+
+**End of Lesson**  
+Recommended next steps: Deploy one pilot agent, gather feedback from a small user group, and document any organization-specific instruction adjustment
