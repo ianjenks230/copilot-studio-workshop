@@ -21,7 +21,7 @@ To create an agent in Microsoft Copilot Studio and enable it to access a SharePo
 ## 2. Administrative Roles and Permissions
 
 - **For creating and managing agents in Copilot Studio:** AI Admin, Global Admin, or equivalent roles in Microsoft Entra ID / Microsoft 365 admin center. Least-privilege roles are recommended.
-- **For accessing SharePoint:** You (or the agent) must have appropriate permissions on the target SharePoint site or document library channel.
+- **For accessing SharePoint:** You (the agent or the user) must have appropriate permissions on the target SharePoint site or document library channel.
 - The agent respects existing SharePoint permissions — users will only see content they have access to.
 
 ## 3. Technical and Environment Setup
