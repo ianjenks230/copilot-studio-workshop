@@ -15,13 +15,28 @@ This final chapter covers how to publish your agent securely and apply operation
 
 ### Steps
 
-1. In Copilot Studio, select **Publish**.
-2. Share the agent with specific users, security groups, or the entire organization via the sharing settings.
-3. Users can access the agent through:
-   - **Microsoft Copilot in Teams**
-   - **The Copilot mobile app**
-   - **Directly in Copilot Studio**
-   (depending on sharing configuration)
+1. In Copilot Studio, select **Publish** to make the latest version of your agent available.
+
+![Publish Agent](/images/publish.png)
+
+2. Navigate to the **Channels** tab in the agent editor.
+3. Click **Microsoft 365 and Microsoft Teams**.
+
+![Publish Agent](/images/publish2.png)
+
+4. Select **Make agent available in Microsoft 365 Copilot**.
+5. Click **Add** to confirm.
+
+![Publish Agent](/images/publish3.png)
+
+6. Share the agent with specific users, security groups, or the entire organization from the sharing settings from copilot 365.
+
+Once published, users can access the agent through:
+- **Microsoft Copilot in Teams** — appears as an available agent in the Copilot side panel
+- **The Copilot mobile app**
+- **Directly in Copilot Studio**
+
+(Availability depends on the channels you enable and sharing configuration.)
 
 ### Sharing Recommendations
 
