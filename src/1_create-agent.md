@@ -19,7 +19,9 @@ Navigate to [Copilot Studio](https://copilotstudio.microsoft.com) and sign in wi
 
 ### 2. Create a New Agent
 
-Select **Create agent** (or **+ New agent**).
+From the Agents panel, Select **+ Create Blank agent**
+
+![Create blank agent in Copilot Studio](/images/Step1.png)
 
 Configure the following fields:
 
@@ -27,9 +29,14 @@ Configure the following fields:
 |---|---|
 | **Agent name** | Use a scoped, descriptive name (e.g., *"ClientX – Knowledge Assistant"*) |
 | **Description** | Clearly state the agent's purpose and boundaries (e.g., *"Provides evidence-based answers from ClientX SharePoint library only. Answers must cite source documents."*) |
+| **Agent Model** | Select the underlying language model for your agent (e.g., *GPT-4.1*, *Claude Sonnet 4.6*). Choose based on your needs, larger models offer stronger reasoning, while smaller models are faster and more cost-efficient. |
 | **Instructions** | Start with the baseline template provided in [Chapter 2](/2_instructions/) and customize as needed |
 
+![Agent configuration fields](/images/Step2.png)
+
 > **Naming tip:** Include the client or domain name and the agent's function in the name. This helps with discoverability and governance when managing multiple agents.
+
+
 
 ### 3. Configure Agent Instructions
 
@@ -48,6 +55,7 @@ Use the built-in test pane after adding knowledge:
 - **Test "no evidence found" behavior** — confirm this response appears when asking questions outside the knowledge scope.
 - **Test permission enforcement** — use a user account that lacks access to the SharePoint folder to validate that permissions are respected.
 
+![Test your Agent in copilot studio](/images/test.png)
 ### 6. Publish and Share
 
 Once testing is complete, proceed to [Chapter 6: Publish & Best Practices](/6_publish/) for publishing and sharing guidance.

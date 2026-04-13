@@ -33,7 +33,7 @@ To create an agent in Microsoft Copilot Studio and enable it to access a SharePo
 
 Adding SharePoint as a knowledge source requires:
 
-- **SharePoint URL** — Omit the `https://` prefix; use the `sharepoint.com` domain; limit to two directory levels deep.
+- **SharePoint URL** — Use the `sharepoint.com` domain; limit to two directory levels deep.
 - **Supported content** — Documents and modern pages are supported. Classic ASPX pages are **not** fully supported for generative answers.
 - **Authentication** — Typically handled via Microsoft Entra ID (default). For manual authentication scenarios, you may need to register an app in Azure Entra ID with appropriate API permissions (e.g., `Sites.Read.All`, `Files.Read.All`) and grant admin consent.
 

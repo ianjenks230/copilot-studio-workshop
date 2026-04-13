@@ -26,25 +26,40 @@ When you add a SharePoint source to your agent, Copilot Studio indexes the conte
 
 In the agent editor, select **Add knowledge** → **SharePoint**.
 
-### 2. Paste the SharePoint URL
+![Add SharePoint knowledge source](/images/Step3.png)
 
-Enter the direct URL to the specific library or folder — **not** the entire site root when possible.
+### 2. Copy the SharePoint URL
+
+Retrieve the link to the Sharepoint Folder you would like to associate to the agent.
 
 **Example:**
 ```
 contoso.sharepoint.com/sites/ClientX/Shared%20Documents/Audit%20Folder
 ```
 
-### 3. Validate Access and Indexing
+![Copy link to knowledge source](/images/Step4.png)
+
+### 3. Input the URL to Copilot studio
+
+Enter the direct URL to the specific library or folder — **not** the entire site root when possible.
+
+![Input link to knowledge source](/images/Step5.png)
+
+Next, Click **Add** then, **Add to Agent**
+
+### 4. Validate Access and Indexing
 
 Copilot Studio will confirm connectivity to the SharePoint location. Wait for the validation to complete successfully.
 
+![Validate link to knowledge source](/images/Step6.png)
+
 If validation fails, check:
-- The URL format is correct (no `https://` prefix)
+
+- The URL format is correct
 - You have read access to the target library
 - The SharePoint site is accessible and not restricted by conditional access policies
 
-### 4. Review Indexed Content
+### 5. Review Indexed Content
 
 After indexing completes (Can take a few minutes or hours depending on size of SharePoint content):
 
@@ -52,7 +67,7 @@ After indexing completes (Can take a few minutes or hours depending on size of S
 - Confirm that the expected documents appear
 - Verify that no unintended content has been included
 
-### 5. Save
+### 6. Save
 
 Save the knowledge source configuration. Allow indexing to fully complete before testing.
 

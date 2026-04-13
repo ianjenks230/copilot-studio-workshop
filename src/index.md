@@ -1,5 +1,5 @@
 ---
-title: "Copilot Studio Agent Creation Using SharePoint-Based Knowledge 🤖"
+title: "Copilot Studio Agent Using SharePoint-Based Knowledge 🤖"
 layout: base.njk
 tags: workshop
 order: 0
@@ -7,7 +7,7 @@ sidebarTitle: "Get started"
 lastUpdated: 2026-04-09
 ---
 
-# Copilot Studio Agent Creation Using SharePoint-Based Knowledge 🤖
+# Copilot Studio Agent Using SharePoint-Based Knowledge 🤖
 
 ## Lesson Overview
 
