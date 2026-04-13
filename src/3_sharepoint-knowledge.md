@@ -45,9 +45,18 @@ Enter the direct URL to the specific library or folder — **not** the entire si
 
 ![Input link to knowledge source](/images/Step5.png)
 
-Next, Click **Add** then, **Add to Agent**
+### 4. Add a Name and Description
 
-### 4. Validate Access and Indexing
+Before confirming, provide a **name** and **description** for the knowledge source:
+
+- **Name** — Use a clear, identifiable label (e.g., *"ClientX Audit Documents"*)
+- **Description** — Be as detailed as possible about what this source contains (e.g., *"Annual audit reports, compliance checklists, and regulatory correspondence for ClientX from 2022–2026"*)
+
+> **Why this matters:** The description is used by Copilot Studio's generative orchestration to determine when and how to use this knowledge source. A vague description leads to less accurate responses.
+
+Click **Add**, then **Add to Agent**.
+
+### 5. Validate Access and Indexing
 
 Copilot Studio will confirm connectivity to the SharePoint location. Wait for the validation to complete successfully.
 
@@ -59,7 +68,7 @@ If validation fails, check:
 - You have read access to the target library
 - The SharePoint site is accessible and not restricted by conditional access policies
 
-### 5. Review Indexed Content
+### 6. Review Indexed Content
 
 After indexing completes (Can take a few minutes or hours depending on size of SharePoint content):
 
@@ -67,7 +76,7 @@ After indexing completes (Can take a few minutes or hours depending on size of S
 - Confirm that the expected documents appear
 - Verify that no unintended content has been included
 
-### 6. Save
+### 7. Save
 
 Save the knowledge source configuration. Allow indexing to fully complete before testing.
 

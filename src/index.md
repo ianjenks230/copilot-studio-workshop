@@ -33,6 +33,12 @@ Large SharePoint repositories often contain authoritative but scattered informat
 - **Chapter 5: Operational Guidance** — Common questions, advanced capabilities, and scaling considerations
 - **Chapter 6: Publish & Best Practices** — Publish securely and apply long-term operational best practices
 
+## Additional Resources
+
+For detailed reference on SharePoint knowledge source configuration, see the official Microsoft documentation:
+
+- [Add SharePoint as a knowledge source — Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-add-sharepoint)
+
 ## Learning Outcomes
 
 By the end of this lesson, participants will be able to:
